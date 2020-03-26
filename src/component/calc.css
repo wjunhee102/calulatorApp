@@ -1,0 +1,31 @@
+
+body {
+    width: 100%;
+    height: 100%;
+}
+
+.calc {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform : translate(-50%, -50%);
+}
+
+.number {
+    width: 300px;
+    height: 300px;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+}
+.number .num {
+    width: 30%;
+    height: 50px;
+}
+/* .number .num:nth-child(2n) {
+    margin: 0 5px;
+} */
+.number .num0 {
+    width: 90%;
+}
