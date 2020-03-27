@@ -66,17 +66,18 @@ const allcancle = ()=> {
     }
 }
 
-const reducer = (state=[], action) => {
+const reducer = (state=0, action) => {
 
     const { add, cancle , allCancle,  trans, per, divi, multiply, minus, plus} = CalcEle;
 
     switch(action.type) {
         case  add :
-            const newNumber = { num : action.num, id: Date.now() }
-            return [ ...state , newNumber ]
+            
+            const newNumber = { num : state.num ?(state.num*10 + action.num):(action.num)   , id: Date.now() }
+            return newNumber
         case allCancle :
-            const newRes = []
-            return [newRes]
+            const newRes = 0
+            return newRes
         default :
             return state;
     }

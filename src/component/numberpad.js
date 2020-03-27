@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { actionCreators } from "../store";
 
 function NumberPad({ num, onBtnClick, click }) {
-    
     return (
         <button 
         className={`num num${num}`} 

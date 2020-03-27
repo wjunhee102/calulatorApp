@@ -7,7 +7,7 @@ function Cancle({res, cancle, setRes, num}) {
         <button className="cancle"
             onClick={()=>{
                 cancle();
-                setRes([])
+                setRes(0)
             }}
         >
             AC

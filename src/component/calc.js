@@ -8,16 +8,17 @@ const number = [ 9, 8, 7, 6, 5, 4, 3, 2, 1];
 
 
 function Calc({num}) {
-    const [ res, setRes ] = useState([]);
+    const [ res, setRes ] = useState(0);
+    console.log(num, typeof(num.num));
 
     const numberClick = (num)=>{
-        setRes([...res,num])
+        setRes(res*10 + num)
     }   
 
     return (
         <article className="calc">
 
-            <div className="resWindow">{res[0]? ( res.map(ele=>(ele)) ) : (0)}</div>
+            <div className="resWindow">{res}</div>
             <div className="numberBox">
                 <Func 
                     result={res}
