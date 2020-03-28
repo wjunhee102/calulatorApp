@@ -11,21 +11,45 @@ body {
     transform : translate(-50%, -50%);
 }
 
+.resWindow {
+    width: 260px;
+    height: 50px;
+    background-color: #ccc;
+    line-height: 50px;
+    text-align: right;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 0 20px;
+}
+
 .number {
     width: 300px;
-    height: 300px;
+    height: 200px;
     display: flex;
     justify-content: flex-end;
     flex-direction: row-reverse;
     flex-wrap: wrap;
 }
 .number .num {
-    width: 30%;
+    width: 100px;
     height: 50px;
 }
 /* .number .num:nth-child(2n) {
     margin: 0 5px;
 } */
 .number .num0 {
-    width: 90%;
+    width: 200px;
+}
+
+.numberBox .func {
+    display: flex;
+    height: 50px;
+    justify-content: flex-start;
+}
+
+.numberBox .func .funcBtn {
+    width: 100px;
+    height: 50px;
 }

@@ -2,54 +2,85 @@ import React from "react";
 import { connect } from "react-redux";
 import { actionCreators } from "../store";
 
-function Cancle({res, cancle, setRes, num}) {
+function FuncBtn({click, type, text}) {
     return (
-        <button className="cancle"
-            onClick={()=>{
-                cancle();
-                setRes(0)
-            }}
+        <button 
+            type="button"
+            className={`funcBtn ${type}`} 
+            onClick={()=>(
+                click(type)
+            )}
         >
-            AC
+            {text}
         </button>
     )
 }
 
-function Trans({res}) {
-    return (
-        <button className="trans">
-            +/-
-        </button>
-    )
-}
+const funcKinds = [
+    { 
+        type : "cancle",
+        text : "AC"
+    },
+    {
+        type : "trans",
+        text : "+/-"
+    },
+    {
+        type : "per",
+        text : "%"
+    }
+]
 
-function Per({res}) {
-    return (
-        <button className="per">
-            %
-        </button>
-    )
-}
+function Func({ result, setRes, addClick }) {
 
+    const funcClick = type => {
 
-function Func({result, cancleClick, setRes, num}) {
+        let value = Number(result.join(""));
+
+        switch(type) {
+            case "cancle" :
+                setRes([]);
+                addClick(0);
+                break;
+            case "trans" :
+                if(!value) return
+                setRes([-value]);
+                addClick(-value);
+                break;
+            case "per" :
+                setRes([value/100])
+                addClick(value/100);
+                break;
+            default :
+                setRes(["오류"]);
+        }
+
+        
+    }
 
     return (
         <div className="func">
-            <Cancle res={result} cancle={cancleClick} setRes={setRes} num={num}/>
-            <Trans res={result} />
-            <Per res={result} />
+            {funcKinds.map((ele, idx) =>(
+                <FuncBtn 
+                    type={ele.type}
+                    click={funcClick}
+                    text={ele.text}
+                    key={idx}
+                />
+            ))}
         </div>
     )
 }
 
 function mapStateToProps(state) {
-    return {num : state.num}
+    return {
+        num : state.num
+    }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        cancleClick : ()=> dispatch(actionCreators.allcancle())
+        addClick : num => dispatch(actionCreators.addNum(num))
     } 
 }
 
