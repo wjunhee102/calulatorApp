@@ -5,6 +5,7 @@ body {
 }
 
 .calc {
+    width: 320px;
     position: absolute;
     left: 50%;
     top: 50%;
@@ -12,7 +13,7 @@ body {
 }
 
 .resWindow {
-    width: 260px;
+    width: 280px;
     height: 50px;
     background-color: #ccc;
     line-height: 50px;
@@ -24,8 +25,18 @@ body {
     padding: 0 20px;
 }
 
+.calcBtn {
+    width: 320px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.numberBox {
+    width: 240px;
+}
+
 .number {
-    width: 300px;
+    width: 240px;
     height: 200px;
     display: flex;
     justify-content: flex-end;
@@ -33,14 +44,14 @@ body {
     flex-wrap: wrap;
 }
 .number .num {
-    width: 100px;
+    width: 80px;
     height: 50px;
 }
 /* .number .num:nth-child(2n) {
     margin: 0 5px;
 } */
 .number .num0 {
-    width: 200px;
+    width: 160px;
 }
 
 .numberBox .func {
@@ -50,6 +61,16 @@ body {
 }
 
 .numberBox .func .funcBtn {
-    width: 100px;
+    width: 80px;
+    height: 50px;
+}
+
+
+.calcBtn .operator {
+    width: 80px;
+}
+
+.calcBtn .operator .oper {
+    width: 80px;
     height: 50px;
 }

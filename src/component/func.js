@@ -17,10 +17,6 @@ function FuncBtn({click, type, text}) {
 }
 
 const funcKinds = [
-    { 
-        type : "cancle",
-        text : "AC"
-    },
     {
         type : "trans",
         text : "+/-"
@@ -31,23 +27,20 @@ const funcKinds = [
     }
 ]
 
-function Func({ result, setRes, addClick }) {
+function Func({ result, setRes, addClick, state }) {
 
     const funcClick = type => {
 
         let value = Number(result.join(""));
 
         switch(type) {
-            case "cancle" :
-                setRes([]);
-                addClick(0);
-                break;
             case "trans" :
                 if(!value) return
                 setRes([-value]);
                 addClick(-value);
                 break;
             case "per" :
+                if(!value) return
                 setRes([value/100])
                 addClick(value/100);
                 break;
@@ -58,8 +51,23 @@ function Func({ result, setRes, addClick }) {
         
     }
 
+    const cancleBtn = () => {
+        console.log(result);
+        setRes([]);
+        if(!result[0]) {
+            addClick(0);
+        }
+    }
+
     return (
         <div className="func">
+            <button 
+                type="button"
+                className={`funcBtn cancle`} 
+                onClick={cancleBtn}>
+                {result || state.num? ("C"):("AC")}
+            </button>
+            
             {funcKinds.map((ele, idx) =>(
                 <FuncBtn 
                     type={ele.type}
@@ -74,7 +82,7 @@ function Func({ result, setRes, addClick }) {
 
 function mapStateToProps(state) {
     return {
-        num : state.num
+        state : state[state.length -1]
     }
 }
 

@@ -45,12 +45,8 @@ const CalcEle = {
     add : "add",
     cancle : "cancle",
     allCancle : "all-cancle",
-    trans : "trans",
-    per : "per",
-    divi : "division",
-    multiply : "multiply",
-    minus : "minus",
-    plus : "plus"
+    factor : "factor",
+    reset : "reset"
 }
 
 const addNum = num => {
@@ -66,22 +62,61 @@ const allcancle = ()=> {
     }
 }
 
+const resetAction = reset => {
+    return {
+        type : CalcEle.reset,
+        reset
+    }
+}
+
+const factorAction = (factorOn, operType) => {
+    return {
+        type : CalcEle.factor,
+        factorOn,
+        operType
+    }
+}
+
+
+
+
 const reducer = (state, action) => {
 
-    const { add, cancle , allCancle,  trans, per, divi, multiply, minus, plus} = CalcEle;
+    const { add, cancle , allCancle, factor, reset} = CalcEle;
 
     switch(action.type) {
         case  add :
-            // const newNumber = { num : state.num ?(state.num*10 + action.num):(action.num)   , id: Date.now() }
-            const newNumber = { num : action.num , id : state[state.length-1].id + 1 }
+            const newNumber = Object.assign({}, state[state.length -1],{
+                num : action.num, 
+                id : state[state.length-1].id + 1
+            });
             return [...state, newNumber]
         case allCancle :
-            const newRes = {num : action.num , id : state[state.length-1].id + 1}
+            const newRes = Object.assign({}, state[state.length -1], {
+                num : action.num, 
+                id : state[state.length-1].id + 1
+            });
             return [...state, newRes]
+        case reset : 
+            const newReset = Object.assign({}, state[state.length -1], {
+                reset : action.reset,
+                id : state[state.length-1].id + 1 
+            }); 
+            return [...state, newReset]
+        case factor : 
+            const newFactor = Object.assign({}, state[state.length -1], {
+                factorOn : action.factorOn, 
+                operType : action.operType,
+                id : state[state.length-1].id + 1 
+            }); 
+            return [...state, newFactor]
         default :
             state = [{
                 num : 0,
-                id : 0
+                id : 1,
+                reset : false,
+                factorOn : false,
+                operType : null
             }]
             return state;
     }
@@ -92,7 +127,9 @@ const store = createStore(reducer,
 
 export const actionCreators = {
     addNum,
-    allcancle 
+    allcancle,
+    factorAction,
+    resetAction
 }
 
 export default store;

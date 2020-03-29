@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import NumberPad from "./numberpad";
 import Func from "./func";
+import Operator from "./operator";
 import './calc.css';
 import { connect } from "react-redux";
 import { actionCreators } from "../store";
@@ -15,16 +16,19 @@ function OptionEle({num}) {
     )
 }
 
-function Calc({num, numBtnClick}) {
+function Calc({num, resetAction}) {
     const [ res, setRes ] = useState([]);
-    // const [ op, setOp ] = useState([]);
+
     console.log(num);
 
-    const numberClick = (num)=>{
-        if(res) {
-            setRes([...res, num])
+    const numberClick = (x)=>{
+        // console.log(num[num.length -1].reset)
+        if(res && num[num.length -1].reset === false) {
+            setRes([...res, x])
         } else {
-            setRes([num])
+            // console.log(x)
+            setRes([x]);
+            resetAction(false);
         }
         
     }   
@@ -39,6 +43,7 @@ function Calc({num, numBtnClick}) {
 
     return (
         <article className="calc">
+
             <select>
                 <option>{num.length} 진행</option>
                 {num.map(ele=>(
@@ -48,32 +53,39 @@ function Calc({num, numBtnClick}) {
                     />
                 ))}
             </select>
+
             <div className="resWindow">{res[0]?(res.map(ele=>(ele))):(0)}</div>
-            <div className="numberBox">
-                <Func 
-                    result={res}
-                    setRes={setRes}
-                />
-                <div className="number">
-                    {number.map(ele => (
-                        <NumberPad
-                            num={ele}
-                            click={numberClick}
-                            key={ele}
-                        />
-                    ))}
-                    <button 
-                        className="num numDot"
-                        onClick={dotClick}
-                    >.</button>
-                    <button 
-                        className="num num0"
-                        onClick={()=>{
-                            numberClick(0);
-                        }}
-                    >0</button>
+            <div className="calcBtn">
+                <div className="numberBox">
+                    <Func 
+                        result={res}
+                        setRes={setRes}
+                    />
+                    <div className="number">
+                        {number.map(ele => (
+                            <NumberPad
+                                num={ele}
+                                click={numberClick}
+                                key={ele}
+                            />
+                        ))}
+                        <button 
+                            className="num numDot"
+                            onClick={dotClick}
+                        >.</button>
+                        <button 
+                            className="num num0"
+                            onClick={()=>{
+                                numberClick(0);
+                            }}
+                        >0</button>
+                    </div>
                 </div>
-            </div> 
+                <Operator 
+                    res={res}
+                    setRes={setRes} />
+            </div>
+ 
         </article>
     )
 }
@@ -84,7 +96,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        numBtnClick : num => dispatch(actionCreators.addNum(num))
+        resetAction : reset => dispatch(actionCreators.resetAction(reset))
     }
 }
 
