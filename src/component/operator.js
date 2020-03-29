@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { actionCreators } from "../store";
 
@@ -26,14 +26,27 @@ const oper = [
 ]
 
 
-function OperBtn({name, text, click}) {
+function OperBtn({name, text, click, onOff}) {
+    const [ on, setOn ] = useState("");
+
+    const btnOn = () => {
+        if(name === onOff) {
+            setOn("on")
+        } else {
+            setOn("")
+        }         
+    }
+    useEffect(()=> {
+        btnOn();
+    },[onOff])
+
     return (
         <button
             onClick={()=>{
                 click(name);
             }}
             type="button" 
-            className={`oper ${name}`}>
+            className={`oper ${name} ${on}`}>
             {text}
         </button>
     )
@@ -67,11 +80,11 @@ function Operator({factorClick, state, resetAction, res, setRes, addClick}) {
                 factorOn = false;
         }
         
-        if(state[state.length -1].operType && !state[state.length -1].reset) {
-            let res1 = state[state.length -1].num;
+        if(state.operType && !state.reset) {
+            let res1 = state.num;
             let res2 = Number(res.join(""));
             let value;
-            switch(state[state.length -1].operType) {
+            switch(state.operType) {
                 case "plus" : 
                     value = res1 + res2;
                     break;
@@ -91,10 +104,8 @@ function Operator({factorClick, state, resetAction, res, setRes, addClick}) {
             if(operType){
                 factorOn = false;
             } 
-            if(value) {
                 setRes([value]);
                 addClick(value);
-            }
         } else {
             addClick(Number(res.join("")));
         }
@@ -106,6 +117,7 @@ function Operator({factorClick, state, resetAction, res, setRes, addClick}) {
         <div className="operator">
             {oper.map((ele, idx)=>(
                 <OperBtn 
+                    onOff={state.operType}
                     name={ele.type}
                     text={ele.text}
                     key={idx}
@@ -118,7 +130,7 @@ function Operator({factorClick, state, resetAction, res, setRes, addClick}) {
 
 function mapStateToProps(state){
     return {
-        state : state
+        state : state[state.length -1]
     }
 }
 

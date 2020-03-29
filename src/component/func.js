@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { actionCreators } from "../store";
 
@@ -27,7 +27,8 @@ const funcKinds = [
     }
 ]
 
-function Func({ result, setRes, addClick, state }) {
+function Func({ result, setRes, addClick, state, factorClick }) {
+    const [ on, setOn ] = useState("AC");
 
     const funcClick = type => {
 
@@ -55,9 +56,22 @@ function Func({ result, setRes, addClick, state }) {
         console.log(result);
         setRes([]);
         if(!result[0]) {
+            factorClick(false, null);
             addClick(0);
         }
     }
+
+    const cancleEvent = () => {
+        if(result[0] || state.num || state.operType) {
+            setOn("C")
+        } else {
+            setOn("AC")
+        }
+    }
+
+    useEffect(()=>{
+        cancleEvent();
+    },[state.num, result, state.operType])
 
     return (
         <div className="func">
@@ -65,7 +79,7 @@ function Func({ result, setRes, addClick, state }) {
                 type="button"
                 className={`funcBtn cancle`} 
                 onClick={cancleBtn}>
-                {result || state.num? ("C"):("AC")}
+                {on}
             </button>
             
             {funcKinds.map((ele, idx) =>(
@@ -88,7 +102,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        addClick : num => dispatch(actionCreators.addNum(num))
+        addClick : num => dispatch(actionCreators.addNum(num)),
+        factorClick: (factorOn, operType) => dispatch(actionCreators.factorAction(factorOn, operType))
     } 
 }
 
