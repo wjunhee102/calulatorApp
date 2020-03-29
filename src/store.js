@@ -28,9 +28,6 @@ const factorAction = (factorOn, operType) => {
     }
 }
 
-
-
-
 const reducer = (state, action) => {
 
     const { add, factor, reset} = CalcEle;

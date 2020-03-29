@@ -1,6 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
-import { actionCreators } from "../store";
 
 function NumberPad({ num, click }) {
     return (
@@ -14,10 +12,4 @@ function NumberPad({ num, click }) {
     )
 }
 
-function mapDispatchToProps(dispatch) {
-    return {
-        numBtnClick: num => dispatch(actionCreators.addNum(num))
-    }
-}
-
-export default connect(null, mapDispatchToProps)(NumberPad);
+export default NumberPad;
