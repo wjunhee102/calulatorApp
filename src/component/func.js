@@ -27,7 +27,7 @@ const funcKinds = [
     }
 ]
 
-function Func({ result, setRes, addClick, state, factorClick }) {
+function Func({ result, setRes, addClick, state, allReset }) {
     const [ on, setOn ] = useState("AC");
 
     const funcClick = type => {
@@ -56,21 +56,16 @@ function Func({ result, setRes, addClick, state, factorClick }) {
         console.log(result);
         setRes([]);
         if(!result[0]) {
-            factorClick(false, null);
-            addClick(0);
+            allReset(false , false, null, 0);
         }
     }
 
-    const cancleEvent = () => {
+    useEffect(()=>{
         if(result[0] || state.num || state.operType) {
             setOn("C")
         } else {
             setOn("AC")
         }
-    }
-
-    useEffect(()=>{
-        cancleEvent();
     },[state.num, result, state.operType])
 
     return (
@@ -103,7 +98,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         addClick : num => dispatch(actionCreators.addNum(num)),
-        factorClick: (factorOn, operType) => dispatch(actionCreators.factorAction(factorOn, operType))
+        allReset : (reset, factorOn, operType, num) => dispatch(actionCreators.allReset(reset, factorOn, operType, num))
     } 
 }
 

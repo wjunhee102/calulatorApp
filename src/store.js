@@ -3,7 +3,8 @@ import { createStore } from "redux";
 const CalcEle = {
     add : "add",
     factor : "factor",
-    reset : "reset"
+    reset : "reset",
+    allReset : "allReset"
 }
 
 const addNum = num => {
@@ -28,9 +29,19 @@ const factorAction = (factorOn, operType) => {
     }
 }
 
+const allReset = (reset, factorOn, operType, num) => {
+    return {
+        type : CalcEle.allReset,
+        reset,
+        factorOn,
+        operType,
+        num
+    }
+}
+
 const reducer = (state, action) => {
 
-    const { add, factor, reset} = CalcEle;
+    const { add, factor, reset, allReset} = CalcEle;
 
     switch(action.type) {
         case  add :
@@ -52,6 +63,15 @@ const reducer = (state, action) => {
                 id : state[state.length-1].id + 1 
             }); 
             return [...state, newFactor]
+        case allReset :
+            const newAllReset = Object.assign({}, state[state.length -1], {
+                reset : action.reset,
+                factorOn : action.factorOn,
+                operType : action.operType,
+                num : action.num,
+                id : state[state.length-1].id + 1
+            });
+            return [...state, newAllReset]
         default :
             state = [{
                 num : 0,
@@ -70,7 +90,8 @@ const store = createStore(reducer,
 export const actionCreators = {
     addNum,
     factorAction,
-    resetAction
+    resetAction,
+    allReset
 }
 
 export default store;

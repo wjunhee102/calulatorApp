@@ -29,16 +29,13 @@ const oper = [
 function OperBtn({name, text, click, onOff}) {
     const [ on, setOn ] = useState("");
 
-    const btnOn = () => {
+    useEffect(()=> {
         if(name === onOff) {
             setOn("on")
         } else {
             setOn("")
-        }         
-    }
-    useEffect(()=> {
-        btnOn();
-    },[onOff])
+        }      
+    },[onOff, name])
 
     return (
         <button
@@ -109,7 +106,6 @@ function Operator({factorClick, state, resetAction, res, setRes, addClick}) {
         } else {
             addClick(Number(res.join("")));
         }
-        console.log(operType);
         factorClick(factorOn, operType);
     }
 
