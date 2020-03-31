@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/calulatorApp/static/css/main.aa3b41d5.chunk.css",
-    "main.js": "/calulatorApp/static/js/main.1160483c.chunk.js",
-    "main.js.map": "/calulatorApp/static/js/main.1160483c.chunk.js.map",
+    "main.js": "/calulatorApp/static/js/main.28e338b2.chunk.js",
+    "main.js.map": "/calulatorApp/static/js/main.28e338b2.chunk.js.map",
     "runtime-main.js": "/calulatorApp/static/js/runtime-main.e3d0918e.js",
     "runtime-main.js.map": "/calulatorApp/static/js/runtime-main.e3d0918e.js.map",
     "static/js/2.55c5846f.chunk.js": "/calulatorApp/static/js/2.55c5846f.chunk.js",
     "static/js/2.55c5846f.chunk.js.map": "/calulatorApp/static/js/2.55c5846f.chunk.js.map",
     "index.html": "/calulatorApp/index.html",
-    "precache-manifest.dfcb98ebac08b8deb3e39c5c668d34d8.js": "/calulatorApp/precache-manifest.dfcb98ebac08b8deb3e39c5c668d34d8.js",
+    "precache-manifest.8a14f4a84727b052ff2f3a07ae5f9a2a.js": "/calulatorApp/precache-manifest.8a14f4a84727b052ff2f3a07ae5f9a2a.js",
     "service-worker.js": "/calulatorApp/service-worker.js",
     "static/css/main.aa3b41d5.chunk.css.map": "/calulatorApp/static/css/main.aa3b41d5.chunk.css.map",
     "static/js/2.55c5846f.chunk.js.LICENSE.txt": "/calulatorApp/static/js/2.55c5846f.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.e3d0918e.js",
     "static/js/2.55c5846f.chunk.js",
     "static/css/main.aa3b41d5.chunk.css",
-    "static/js/main.1160483c.chunk.js"
+    "static/js/main.28e338b2.chunk.js"
   ]
 }
