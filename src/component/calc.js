@@ -54,14 +54,16 @@ function Calc({num, resetAction}) {
                         ))}
                         <button 
                             className="num numDot"
-                            onClick={dotClick}
-                        >.</button>
+                            onClick={dotClick}>
+                            <span>.</span>
+                        </button>
                         <button 
                             className="num num0"
                             onClick={()=>{
                                 numberClick(0);
-                            }}
-                        >0</button>
+                        }}>
+                            <span>0</span>
+                        </button>
                     </div>
                 </div>
                 <Operator 

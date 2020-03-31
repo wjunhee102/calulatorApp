@@ -9,11 +9,11 @@ const oper = [
     },
     {
         type : "multiply",
-        text : "*"
+        text : "X"
     },
     {
         type : "minus",
-        text : "-"
+        text : "ㅡ"
     },
     {
         type : "plus",
@@ -24,7 +24,6 @@ const oper = [
         text : "="
     }
 ]
-
 
 function OperBtn({name, text, click, onOff}) {
     const [ on, setOn ] = useState("");
@@ -44,7 +43,7 @@ function OperBtn({name, text, click, onOff}) {
             }}
             type="button" 
             className={`oper ${name} ${on}`}>
-            {text}
+            <span>{text}</span>
         </button>
     )
 }

@@ -7,7 +7,7 @@ function NumberPad({ num, click }) {
         onClick={()=>{
             click(num);
         }}>
-            {num}
+            <span>{num}</span>
         </button>
     )
 }

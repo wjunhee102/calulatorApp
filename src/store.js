@@ -4,7 +4,8 @@ const CalcEle = {
     add : "add",
     factor : "factor",
     reset : "reset",
-    allReset : "allReset"
+    allReset : "allReset",
+    allRemove : "allRemove"
 }
 
 const addNum = num => {
@@ -39,9 +40,20 @@ const allReset = (reset, factorOn, operType, num) => {
     }
 }
 
+const allRemove = (reset, factorOn, operType, num) => {
+    return {
+        type : CalcEle.allRemove,
+        reset,
+        factorOn,
+        operType,
+        num
+    }
+}
+
+
 const reducer = (state, action) => {
 
-    const { add, factor, reset, allReset} = CalcEle;
+    const { add, factor, reset, allReset, allRemove} = CalcEle;
 
     switch(action.type) {
         case  add :
@@ -49,6 +61,7 @@ const reducer = (state, action) => {
                 num : action.num, 
                 id : state[state.length-1].id + 1
             });
+            localStorage.setItem("num", newNumber.num);
             return [...state, newNumber]
         case reset : 
             const newReset = Object.assign({}, state[state.length -1], {
@@ -72,9 +85,23 @@ const reducer = (state, action) => {
                 id : state[state.length-1].id + 1
             });
             return [...state, newAllReset]
+        case allRemove : 
+            const newAllRemove = Object.assign({}, state[state.length -1], {
+                reset : action.reset,
+                factorOn : action.factorOn,
+                operType : action.operType,
+                num : action.num,
+                id : state[state.length-1].id + 1
+            });
+            localStorage.removeItem("num");
+            return [newAllRemove]
         default :
+            const local = localStorage.getItem("num");
+            let i = 0;
+            console.log(typeof(i))
+            if(local) i = local
             state = [{
-                num : 0,
+                num : i,
                 id : 1,
                 reset : false,
                 factorOn : false,
@@ -91,7 +118,8 @@ export const actionCreators = {
     addNum,
     factorAction,
     resetAction,
-    allReset
+    allReset,
+    allRemove
 }
 
 export default store;

@@ -11,7 +11,7 @@ function FuncBtn({click, type, text}) {
                 click(type)
             )}
         >
-            {text}
+            <span>{text}</span>
         </button>
     )
 }
@@ -74,7 +74,7 @@ function Func({ result, setRes, addClick, state, allReset }) {
                 type="button"
                 className={`funcBtn cancle`} 
                 onClick={cancleBtn}>
-                {on}
+                <span>{on}</span>
             </button>
             
             {funcKinds.map((ele, idx) =>(

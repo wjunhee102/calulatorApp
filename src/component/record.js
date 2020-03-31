@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { actionCreators } from "../store";
 
-function Options({value, idx}){
+function Options({value}){
     console.log(value);
     return (
         <option value={value}>
-            {idx + 1}. {value}
+            {value}
         </option>
     )
 }
@@ -23,7 +23,7 @@ function useInput(defaultValue) {
     return { value, onChange }
 }
 
-function Record({state, allReset, setRes}) {
+function Record({state, allReset, setRes, allRemove}) {
     const [ recordValue, setRV ] = useState([0]);
 
     const selectChange = useInput(state);
@@ -51,24 +51,28 @@ function Record({state, allReset, setRes}) {
             }
         }
     }
+    const allRemoveAction = ()=> {
+        allRemove(false, false, null, 0);
+        setRV([state]);
+    }
 
     return (
-        <form>
-            <div>{state}</div>
+        <div className="record">
             <select {...selectChange}>
-                <option value={0}>값을 선택해주세요.</option>
+                <option value={0}>계산 기록</option>
                 {recordValue[0] ? (
                     recordValue.map((ele, idx)=>(
                         <Options 
                         value={ele}
                         key={idx}
-                        idx={idx}
                     />
                     ))
                 ):(null)}
             </select>
             <button type="button" onClick={timeMachine}>값 불러오기</button>
-        </form>
+            <button type="button" onClick={allRemoveAction}>기록 지우기</button>
+            <div className="state">{state}</div>
+        </div>
     )
 }
 
@@ -79,7 +83,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        allReset : (reset, factorOn, operType, num) => dispatch(actionCreators.allReset(reset, factorOn, operType, num))
+        allReset : (reset, factorOn, operType, num) => dispatch(actionCreators.allReset(reset, factorOn, operType, num)),
+        allRemove : (reset, factorOn, operType, num) => dispatch(actionCreators.allRemove(reset, factorOn, operType, num))
     }
 }
 
