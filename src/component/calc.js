@@ -12,8 +12,6 @@ const number = [ 9, 8, 7, 6, 5, 4, 3, 2, 1];
 function Calc({num, resetAction}) {
     const [ res, setRes ] = useState([]);
 
-    console.log(num);
-
     const numberClick = (x)=>{
         if(res && num[num.length -1].reset === false) {
             setRes([...res, x])

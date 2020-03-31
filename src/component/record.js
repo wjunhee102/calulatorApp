@@ -32,7 +32,7 @@ function Record({state, allReset, setRes, allRemove}) {
     useEffect(()=>{
         const rValue = recordValue[recordValue.length -1];
         if(rValue !== state) {
-            if(!rValue) {
+            if(!recordValue[0]) {
                 setRV([state])
             } else {
                 setRV([...recordValue, state])

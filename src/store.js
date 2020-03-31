@@ -98,7 +98,6 @@ const reducer = (state, action) => {
         default :
             const local = localStorage.getItem("num");
             let i = 0;
-            console.log(typeof(i))
             if(local) i = local
             state = [{
                 num : i,

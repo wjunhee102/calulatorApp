@@ -53,7 +53,6 @@ function Func({ result, setRes, addClick, state, allReset }) {
     }
 
     const cancleBtn = () => {
-        console.log(result);
         setRes([]);
         if(!result[0]) {
             allReset(false , false, null, 0);
