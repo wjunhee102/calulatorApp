@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { actionCreators } from "../store";
 
 function Options({value}){
-    console.log(value);
     return (
         <option value={value}>
             {value}
